@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "autismon-mod",
+  "version": "${version}",
+  "name": "AUTISMON-MOD",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/ponchisao326/BeaconEnhancer"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/autismon-mod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "victorgponce.com.autismonmod.client.AUTISMON_MODClient"
+    ],
+    "main": [
+      "victorgponce.com.autismonmod.AUTISMON_MOD"
+    ]
+  },
+  "mixins": [
+    "autismon-mod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
