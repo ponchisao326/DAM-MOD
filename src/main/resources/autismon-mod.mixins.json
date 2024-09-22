@@ -4,7 +4,9 @@
   "package": "victorgponce.com.autismonmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "mojangLoadingOverlay"
+    "mojangLoadingOverlay",
+    "SplashOverlayAccessor",
+    "SplashOverlayInvoker"
   ],
   "client": [
   ],
