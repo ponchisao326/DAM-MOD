@@ -3,7 +3,6 @@ package victorgponce.com.autismonmod;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.command.CommandRegistryAccess;
@@ -20,14 +19,14 @@ import victorgponce.com.autismonmod.commands.Info;
 
 public class AUTISMON_MOD implements ModInitializer {
 
-    public static final String MOD_ID = "autismon";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final String MOD_ID_SERVER = "autismon-server";
+    public static final Logger LOGGER_SERVER = LoggerFactory.getLogger(MOD_ID_SERVER);
 
     @Override
     public void onInitialize() {
 
-        LOGGER.info("AUTISMON: Iniciando server-side");
-        LOGGER.info("Autor: Ponchisao326 (PonchisaoHosting)");
+        LOGGER_SERVER.info("AUTISMON: Iniciando server-side");
+        LOGGER_SERVER.info("Autor: Ponchisao326 (PonchisaoHosting)");
 
 
 
