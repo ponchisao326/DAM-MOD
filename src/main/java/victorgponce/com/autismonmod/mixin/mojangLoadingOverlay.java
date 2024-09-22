@@ -2,18 +2,16 @@ package victorgponce.com.autismonmod.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.resource.Resource;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import victorgponce.com.autismonmod.AUTISMON_MOD;
 import victorgponce.com.autismonmod.client.AUTISMON_MODClient;
 
 import java.util.Optional;
@@ -21,12 +19,16 @@ import java.util.Optional;
 @Mixin(SplashOverlay.class)
 public class mojangLoadingOverlay {
 
+    @Unique
     Identifier BACKGROUND_TEXTURE = new Identifier("victorgponce_com_autismon", "mixin/title_screen/background-1.png");
+    @Unique
     Identifier INTRO_BACKGROUND_TEXTURE = new Identifier("victorgponce_com_autismon", "mixin/title_screen/mojang-menu.png");
 
 
     // Variable para guardar el tiempo final al llegar al 100%
+    @Unique
     private long overlayEndTime = -1;
+    @Unique
     private final long delayDuration = 1000; // 1000 ms = 1 segundo
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
