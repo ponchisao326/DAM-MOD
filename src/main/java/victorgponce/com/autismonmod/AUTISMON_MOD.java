@@ -51,12 +51,7 @@ public class AUTISMON_MOD implements ModInitializer {
                     .append(Text.literal("/info").formatted(Formatting.GREEN)), false);
         });
 
-        CommandRegistrationCallback.EVENT.register(new CommandRegistrationCallback() {
-            @Override
-            public void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-                Info.registerCommands(dispatcher);
-            }
-        });
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> Info.registerCommands(dispatcher));
 
     }
 }
