@@ -3,6 +3,7 @@ package victorgponce.com.autismonmod.mixin;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
@@ -78,7 +79,7 @@ public class mojangLoadingOverlay {
                 // Comparar el tiempo actual con el tiempo final + retraso
                 if (currentTime - overlayEndTime > delayDuration) {
                     // Cuando el tiempo haya pasado el retraso, ocultar el overlay
-                    MinecraftClient.getInstance().setOverlay(null);
+                    MinecraftClient.getInstance().setOverlay((Overlay) null);
                 }
             }
 
