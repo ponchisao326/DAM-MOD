@@ -6,10 +6,10 @@
   "description": "",
   "authors": [],
   "contact": {
-    "repo": "https://github.com/ponchisao326/BeaconEnhancer"
+    "repo": "https://github.com/ponchisao326/AUTISMON-MOD"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/autismon-mod/icon.png",
+  "icon": "assets/victorgponce_com_autismon/textures/gui/icons/icon_16x16.png",
   "environment": "*",
   "entrypoints": {
     "client": [

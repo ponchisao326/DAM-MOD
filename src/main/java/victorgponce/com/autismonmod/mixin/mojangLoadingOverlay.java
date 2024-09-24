@@ -21,8 +21,6 @@ import java.util.Optional;
 public class mojangLoadingOverlay {
 
     @Unique
-    Identifier BACKGROUND_TEXTURE = new Identifier("victorgponce_com_autismon", "mixin/title_screen/background-1.png");
-    @Unique
     Identifier INTRO_BACKGROUND_TEXTURE = new Identifier("victorgponce_com_autismon", "mixin/title_screen/mojang-menu.png");
 
 
@@ -41,12 +39,10 @@ public class mojangLoadingOverlay {
         int height = client.getWindow().getScaledHeight();
 
         // Renderizar la textura de fondo
-        Identifier backgroundTextureId = BACKGROUND_TEXTURE;
         Identifier introBackgroundTextureId = INTRO_BACKGROUND_TEXTURE;
-        Optional<Resource> resourceOptional = client.getResourceManager().getResource(backgroundTextureId);
         Optional<Resource> introResourceOptional = client.getResourceManager().getResource(introBackgroundTextureId);
 
-        if (resourceOptional.isPresent() && introResourceOptional.isPresent()) {
+        if (introResourceOptional.isPresent()) {
             // Renderizar la textura de introducción
             RenderSystem.setShaderTexture(0, introBackgroundTextureId);
             drawContext.drawTexture(introBackgroundTextureId, 0, 0, 0.0F, 0.0F, width, height, width, height);

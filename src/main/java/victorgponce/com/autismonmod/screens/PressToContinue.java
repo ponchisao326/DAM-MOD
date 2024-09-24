@@ -23,6 +23,8 @@ import victorgponce.com.autismonmod.loading.SoundLoader;
 import java.util.Optional;
 import java.util.Random;
 
+import static victorgponce.com.autismonmod.client.AUTISMON_MODClient.LOGGER_CLIENT;
+
 public class PressToContinue extends Screen {
 
     private Screen parent;
@@ -60,16 +62,14 @@ public class PressToContinue extends Screen {
     protected void init() {
         super.init();
 
-        Random rand = new Random();
-        int rand_int1 = rand.nextInt(6); // Genera un número aleatorio entre 0 y 5
+        // Random rand = new Random();
+        // int rand_int1 = rand.nextInt(6); // Genera un número aleatorio entre 0 y 5
 
-        switch (rand_int1) {
-            case 1 -> press = SoundLoader.PRESS_BG_1;
+        press = SoundLoader.PRESS_BG_1;
             // case 2 -> press = SoundLoader.PRESS_BG_2;
             // case 3 -> press = SoundLoader.PRESS_BG_3;
             // case 4 -> press = SoundLoader.PRESS_BG_4;
             // case 5 -> press = SoundLoader.PRESS_BG_5;
-        }
     }
 
     @Override
@@ -89,7 +89,7 @@ public class PressToContinue extends Screen {
         int height = client.getWindow().getScaledHeight();
 
         if (!sounding) {
-            SoundEvent pressBg1SoundEvent = SoundLoader.PRESS_BG_1;
+            SoundEvent pressBg1SoundEvent = press;
             PositionedSoundInstance soundInstance = PositionedSoundInstance.master(pressBg1SoundEvent, 1.0f);
             MinecraftClient.getInstance().getSoundManager().play(soundInstance);
             sounding = true;
@@ -101,16 +101,13 @@ public class PressToContinue extends Screen {
             sounding = false;
             AUTISMON_MODClient.LOGGER_CLIENT.info("Ajustando sounding a false");
         }
-
         // Renderizar la textura de fondo
         Identifier backgroundTextureId = BACKGROUND_TEXTURE;
         Optional<Resource> resourceOptional = client.getResourceManager().getResource(backgroundTextureId);
-
         if (resourceOptional.isPresent()) {
             Resource resource = resourceOptional.get();
             RenderSystem.setShaderTexture(0, backgroundTextureId);
             drawContext.drawTexture(backgroundTextureId, 0, 0, 0.0F, 0.0F, width, height, width, height);
-
             // Determinar si es hora de hacer parpadear el texto
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastMessageChangeTime >= MESSAGE_CHANGE_INTERVAL) {
@@ -120,7 +117,6 @@ public class PressToContinue extends Screen {
                 fadeOutStartTime = fadeInStartTime + FADE_IN_DURATION;
             }
             String continuetext = continueText[currentMessageIndex];
-
             // Calculate alpha for fade-in effect
             int alpha = 255;
             if (!fadeInComplete && currentTime < fadeInStartTime + FADE_IN_DURATION) {
@@ -128,14 +124,12 @@ public class PressToContinue extends Screen {
             } else {
                 fadeInComplete = true;
             }
-
             // Calculate alpha for fade-out effect
             if (fadeInComplete && !fadeOutComplete && currentTime > fadeOutStartTime && currentTime < fadeOutStartTime + FADE_OUT_DURATION) {
                 alpha = (int) MathHelper.clamp(255 - (currentTime - fadeOutStartTime) * 255.0 / FADE_OUT_DURATION, 0, 255);
             } else if (currentTime > fadeOutStartTime + FADE_OUT_DURATION) {
                 fadeOutComplete = true;
             }
-
             // Renderizar texto en medio de la pantalla
             String username = client.getSession().getUsername();
             Text text = Text.of("¡Bienvenido " + username +  " a AUTISMON!");
@@ -143,7 +137,6 @@ public class PressToContinue extends Screen {
             int textX = (width - textWidth) / 2;
             int textY = height / 2;
             drawContext.drawText(textRenderer, text, textX, textY, 0xFFFFFF | (alpha << 24), false);
-
             // Renderizar texto de "Presiona cualquier tecla para continuar"
             Text pressText = Text.of(continuetext);
             int pressTextWidth = textRenderer.getWidth(pressText);

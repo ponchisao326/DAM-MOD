@@ -47,6 +47,8 @@ public class Info {
         // Mensaje adicional: "Mod creado por Ponchisao326"
         source.sendMessage(prefix.copy()
                 .append(Text.literal("Mod creado por Ponchisao326").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD)));
+
+
     }
 
 }
