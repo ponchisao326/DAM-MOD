@@ -6,6 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import org.slf4j.LoggerFactory;
 
 import org.slf4j.Logger;
+import victorgponce.com.autismonmod.loading.SoundLoader;
 import victorgponce.com.autismonmod.screens.PressToContinue;
 import victorgponce.com.autismonmod.screens.*;
 
@@ -23,10 +24,14 @@ public class AUTISMON_MODClient implements ClientModInitializer {
         LOGGER.info("AUTISMON: Iniciando cliente");
         LOGGER.info("Autor: Ponchisao326 (PonchisaoHosting)");
 
+        // Registrar sonidos
+        SoundLoader.registerSounds();
+
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
             MinecraftClient.getInstance().execute(() -> {
                 PressToContinue pressToContinueScreen = new PressToContinue();
                 MinecraftClient.getInstance().setScreen(pressToContinueScreen);
+                MinecraftClient.getInstance().getWindow().setTitle("AUTISMON 1.20.1 - PonchisaoHosting");
             });
         });
     }

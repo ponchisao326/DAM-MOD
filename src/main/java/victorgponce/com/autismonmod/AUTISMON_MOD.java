@@ -40,8 +40,6 @@ public class AUTISMON_MOD implements ModInitializer {
         LOGGER_SERVER.info("AUTISMON: Iniciando server-side");
         LOGGER_SERVER.info("Autor: Ponchisao326 (PonchisaoHosting)");
 
-        SoundLoader.registerSounds();
-
         ServerPlayConnectionEvents.JOIN.register((ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) -> {
             // Obtener el jugador desde el handler
             ServerPlayerEntity player = handler.player;

@@ -3,16 +3,11 @@ package victorgponce.com.autismonmod.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.WeightedSoundSet;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.resource.Resource;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -21,7 +16,6 @@ import victorgponce.com.autismonmod.client.AUTISMON_MODClient;
 import victorgponce.com.autismonmod.loading.SoundLoader;
 
 import java.util.Optional;
-import java.util.Random;
 
 import static victorgponce.com.autismonmod.client.AUTISMON_MODClient.LOGGER_CLIENT;
 
@@ -53,6 +47,9 @@ public class PressToContinue extends Screen {
     // Almacenar una referencia al sonido que se está reproduciendo
     private PositionedSoundInstance soundInstance;
     private SoundEvent press;
+    private double musicCategory = 0.0;
+    private double masterCategory = 0.0;
+    private static boolean first = false;
 
     public PressToContinue() {
         super(Text.of("Press to Continue"));
@@ -61,15 +58,6 @@ public class PressToContinue extends Screen {
     @Override
     protected void init() {
         super.init();
-
-        // Random rand = new Random();
-        // int rand_int1 = rand.nextInt(6); // Genera un número aleatorio entre 0 y 5
-
-        press = SoundLoader.PRESS_BG_1;
-            // case 2 -> press = SoundLoader.PRESS_BG_2;
-            // case 3 -> press = SoundLoader.PRESS_BG_3;
-            // case 4 -> press = SoundLoader.PRESS_BG_4;
-            // case 5 -> press = SoundLoader.PRESS_BG_5;
     }
 
     @Override
@@ -88,18 +76,35 @@ public class PressToContinue extends Screen {
         int width = client.getWindow().getScaledWidth();
         int height = client.getWindow().getScaledHeight();
 
+        if (!first) {
+            // Guardar configuración del sonido en variables (float)
+            musicCategory = MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC);
+            masterCategory = MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MASTER);
+            LOGGER_CLIENT.info("Configuración de Musica: " + musicCategory);
+            LOGGER_CLIENT.info("Configuración Master: " + masterCategory);
+            LOGGER_CLIENT.info("Seteando boolean first a true...");
+            first = true;
+
+            // Setear nuevas configuraciones temporales para evitar musica que no queremos
+            LOGGER_CLIENT.info("Seteando Opción 'Musica' al 0% (Inicio Screen)");
+            LOGGER_CLIENT.info("Seteando Opción 'Master' al 50% (Inicio Screen)");
+            if (musicCategory != 0.0) {MinecraftClient.getInstance().options.getSoundVolumeOption(SoundCategory.MUSIC).setValue(0.0);}
+            if (masterCategory != 0.5) {MinecraftClient.getInstance().options.getSoundVolumeOption(SoundCategory.MASTER).setValue(0.5);}
+        }
+
         if (!sounding) {
-            SoundEvent pressBg1SoundEvent = press;
-            PositionedSoundInstance soundInstance = PositionedSoundInstance.master(pressBg1SoundEvent, 1.0f);
+            SoundEvent pressBg1SoundEvent = SoundLoader.PRESS_BG_1;
+            soundInstance = PositionedSoundInstance.master(pressBg1SoundEvent, 1.0f);
             MinecraftClient.getInstance().getSoundManager().play(soundInstance);
             sounding = true;
-            AUTISMON_MODClient.LOGGER_CLIENT.info("Ajustando sounding a true " + soundInstance + press);
+            LOGGER_CLIENT.info("Ajustando sounding a true " + soundInstance + press);
         }
 
         // Verificar si el sonido está en reproducción
         if (soundInstance != null && !MinecraftClient.getInstance().getSoundManager().isPlaying(soundInstance)) {
+            MinecraftClient.getInstance().getSoundManager().stopAll();
             sounding = false;
-            AUTISMON_MODClient.LOGGER_CLIENT.info("Ajustando sounding a false");
+            LOGGER_CLIENT.info("Ajustando sounding a false");
         }
         // Renderizar la textura de fondo
         Identifier backgroundTextureId = BACKGROUND_TEXTURE;
@@ -130,12 +135,12 @@ public class PressToContinue extends Screen {
             } else if (currentTime > fadeOutStartTime + FADE_OUT_DURATION) {
                 fadeOutComplete = true;
             }
-            // Renderizar texto en medio de la pantalla
+            // Renderizar texto en la parte superior de la pantalla
             String username = client.getSession().getUsername();
             Text text = Text.of("¡Bienvenido " + username +  " a AUTISMON!");
             int textWidth = textRenderer.getWidth(text);
             int textX = (width - textWidth) / 2;
-            int textY = height / 2;
+            int textY = 10; // adjust this value to change the vertical position
             drawContext.drawText(textRenderer, text, textX, textY, 0xFFFFFF | (alpha << 24), false);
             // Renderizar texto de "Presiona cualquier tecla para continuar"
             Text pressText = Text.of(continuetext);
@@ -155,9 +160,16 @@ public class PressToContinue extends Screen {
         // Llama al método keyPressed de la superclase para manejar las entradas por teclado por defecto
         super.keyPressed(keyCode, scanCode, modifiers);
 
-        // MinecraftClient.getInstance().getSoundManager().stopAll();
+        LOGGER_CLIENT.info("Seteando Opción 'Musica' al " + musicCategory*100 + "% (Tecla Presionada)");
+        LOGGER_CLIENT.info("Seteando Opción 'Master' al " + masterCategory*100 + "% (Tecla Presionada)");
+        MinecraftClient.getInstance().options.getSoundVolumeOption(SoundCategory.MUSIC).setValue(musicCategory);
+        MinecraftClient.getInstance().options.getSoundVolumeOption(SoundCategory.MUSIC).setValue(masterCategory);
+
+        MinecraftClient.getInstance().getSoundManager().stopAll();
         // LoadingScreen loadingScreen = new LoadingScreen();
         // MinecraftClient.getInstance().setScreen(loadingScreen);
+
+
 
         return true;
     }
