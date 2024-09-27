@@ -57,18 +57,41 @@ public class CustomMainMenu extends Screen {
     private double musicCategory = 0.0;
     private double masterCategory = 0.0;
     private String STATUS = "El servidor se encuentra OFFLINE";
-    private static final long PING_CHECK_INTERVAL_MS = 10000; // Intervalo de 10 segundos
+    private static final long PING_CHECK_INTERVAL_MS = 5000; // Intervalo de 5 segundos
     private long lastPingCheckTime = 0; // Momento del último chequeo
+    private Thread pingThread; // Hilo para la verificación del servidor
+    private boolean stopPingThread = false; // Variable para detener el hilo cuando sea necesario
 
 
 
     public CustomMainMenu() {
         super(Text.of("Main Menu"));
+        startPingThread();
 
         // Inicializar los identificadores de textura
         for (int i = 0; i < backgroundTextures.length; i++) {
             backgroundTextures[i] = new Identifier("victorgponce_com_autismon:title_screen/" + (i + 1) + ".png");
         }
+    }
+
+    // Método para iniciar el hilo de verificación del servidor
+    private void startPingThread() {
+        pingThread = new Thread(() -> {
+            while (!stopPingThread) {
+                if (Pinger(NODE, PORT)) {
+                    STATUS = "El servidor se encuentra ONLINE";
+                } else {
+                    STATUS = "El servidor se encuentra OFFLINE";
+                }
+                // Esperar el intervalo de tiempo definido antes de la siguiente verificación
+                try {
+                    Thread.sleep(PING_CHECK_INTERVAL_MS);
+                } catch (InterruptedException e) {
+                    LOGGER_CLIENT.error("El hilo de verificación de ping fue interrumpido: " + e.getMessage());
+                }
+            }
+        });
+        pingThread.start();
     }
 
     @Override
@@ -128,23 +151,24 @@ public class CustomMainMenu extends Screen {
 
     public static boolean Pinger(String address, int port) {
         try (Socket socket = new Socket()) {
-            // Intentar conectar al puerto con un tiempo de espera de 5 segundos (5000 ms)
-            socket.connect(new java.net.InetSocketAddress(address, port), 1000);
-
-            // Si la conexión es exitosa, el puerto está abierto
-            return true;
-        } catch (SocketTimeoutException e) {
-            // Si se excede el tiempo de espera, el servidor no está respondiendo en el puerto
-            LOGGER_CLIENT.warn("El servidor no responde en el puerto " + port + ": Tiempo de espera excedido.");
+            socket.connect(new java.net.InetSocketAddress(address, port), 1000); // Tiempo de espera de 1 segundo
+            return true; // Si la conexión es exitosa
         } catch (IOException e) {
-            // Si ocurre cualquier otra excepción, el puerto no está accesible
-            LOGGER_CLIENT.error("Error al conectar con el servidor en el puerto " + port + ": " + e.getMessage());
+            LOGGER_CLIENT.error("Error al conectar con el servidor: " + e.getMessage());
         }
-        return false;
+        return false; // Si ocurre algún error o no se puede conectar
     }
 
     @Override
     public void close() {
+        stopPingThread = true; // Indicar que el hilo debe detenerse
+        try {
+            if (pingThread != null && pingThread.isAlive()) {
+                pingThread.join(); // Esperar a que el hilo termine
+            }
+        } catch (InterruptedException e) {
+            LOGGER_CLIENT.error("Error al detener el hilo de ping: " + e.getMessage());
+        }
         this.client.setScreen(parent);
     }
 
@@ -185,16 +209,6 @@ public class CustomMainMenu extends Screen {
 
         // Obtener el tiempo actual
         long currentTimePing = System.currentTimeMillis();
-
-        // Verificar el estado del servidor solo si ha pasado el tiempo del intervalo
-        if (currentTimePing - lastPingCheckTime > PING_CHECK_INTERVAL_MS) {
-            if (Pinger(NODE, PORT)) {
-                STATUS = "El servidor se encuentra ONLINE";
-            } else {
-                STATUS = "El servidor se encuentra OFFLINE";
-            }
-            lastPingCheckTime = currentTimePing; // Actualizar el tiempo del último chequeo
-        }
 
         // Actualizar el contenido del TextWidget con el nuevo estado
         pingTextWidget.setMessage(Text.of(STATUS));
