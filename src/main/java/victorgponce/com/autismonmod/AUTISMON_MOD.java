@@ -13,6 +13,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourcePack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -43,9 +44,18 @@ public class AUTISMON_MOD implements ModInitializer {
         LOGGER_SERVER.info("AUTISMON: Iniciando server-side");
         LOGGER_SERVER.info("Autor: Ponchisao326 (PonchisaoHosting)");
 
+        // Registrar sonidos
+        SoundLoader.registerSounds();
+
         ServerPlayConnectionEvents.JOIN.register((ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) -> {
             // Obtener el jugador desde el handler
             ServerPlayerEntity player = handler.player;
+
+            // Obtener el PlayerManager desde el servidor
+            PlayerManager playerManager = server.getPlayerManager();
+
+            // Obtener la lista de jugadores desde el PlayerManager
+            List<ServerPlayerEntity> players = playerManager.getPlayerList();
 
             // Crear el prefijo [AUTISMON MOD] con colores personalizados
             Text prefix = Text.literal("[").formatted(Formatting.GRAY)
@@ -63,11 +73,62 @@ public class AUTISMON_MOD implements ModInitializer {
                     .append(Text.literal("Si necesitas información y/o ayuda sobre el servidor usa ").formatted(Formatting.BLUE))
                     .append(Text.literal("/info").formatted(Formatting.GREEN)), false);
 
-            // Reproducir el sonido para todos los jugadores
-            for (ServerPlayerEntity otherPlayer : server.getPlayerManager().getPlayerList()) {
-                otherPlayer.playSound(SoundLoader.Erika, SoundCategory.MASTER, 20, 1.0f);
+            switch (player.getDisplayName().getString().toLowerCase()) {
+                case "jokyo" -> {
+                    player.playSound(SoundLoader.Jokyo, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Jokyo, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "ikertc" -> {
+                    player.playSound(SoundLoader.Iker, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Iker, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "ponchisao326" -> {
+                    player.playSound(SoundLoader.Ponchisao, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Ponchisao, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "mapeda2018" -> {
+                    player.playSound(SoundLoader.Mapeda, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Mapeda, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "arrkness" -> {
+                    player.playSound(SoundLoader.Arkness, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Arkness, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "soy_un_arbol" -> {
+                    player.playSound(SoundLoader.Arbol, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Arbol, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "jotaromc_yt" -> {
+                    player.playSound(SoundLoader.Jotaro, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Jotaro, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "Apin_827" -> {
+                    player.playSound(SoundLoader.Apin, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Apin, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
+                case "thezakto" -> {
+                    player.playSound(SoundLoader.Zakto, SoundCategory.MASTER, 20, 1.0f);
+                    for (ServerPlayerEntity otherPlayer : players) {
+                        otherPlayer.playSound(SoundLoader.Zakto, SoundCategory.MASTER, 20, 1.0f);
+                    }
+                }
             }
-
         });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> Info.registerCommands(dispatcher));

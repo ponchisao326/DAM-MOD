@@ -24,9 +24,6 @@ public class AUTISMON_MODClient implements ClientModInitializer {
         LOGGER.info("AUTISMON: Iniciando cliente");
         LOGGER.info("Autor: Ponchisao326 (PonchisaoHosting)");
 
-        // Registrar sonidos
-        SoundLoader.registerSounds();
-
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
             MinecraftClient.getInstance().execute(() -> {
                 PressToContinue pressToContinueScreen = new PressToContinue();

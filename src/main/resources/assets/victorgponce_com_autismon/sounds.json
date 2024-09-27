@@ -13,5 +13,55 @@
     "sounds": [
       "victorgponce_com_autismon:erika"
     ]
+  },
+  "jokyo": {
+    "sounds": [
+      "victorgponce_com_autismon:jokyo"
+    ]
+  },
+  "iker": {
+    "sounds": [
+      "victorgponce_com_autismon:iker"
+    ]
+  },
+  "ponchisao": {
+    "sounds": [
+      "victorgponce_com_autismon:ponchisao"
+    ]
+  },
+  "mapeda": {
+    "sounds": [
+      "victorgponce_com_autismon:mapeda"
+    ]
+  },
+  "arkness": {
+    "sounds": [
+      "victorgponce_com_autismon:arkness"
+    ]
+  },
+  "arbol": {
+    "sounds": [
+      "victorgponce_com_autismon:arbol"
+    ]
+  },
+  "jotaro": {
+    "sounds": [
+      "victorgponce_com_autismon:jotaro"
+    ]
+  },
+  "apin": {
+    "sounds": [
+      "victorgponce_com_autismon:apin"
+    ]
+  },
+  "r0val": {
+    "sounds": [
+      "victorgponce_com_autismon:r0val"
+    ]
+  },
+  "zakto": {
+    "sounds": [
+      "victorgponce_com_autismon:zakto"
+    ]
   }
 }
