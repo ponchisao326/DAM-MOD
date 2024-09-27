@@ -3,5 +3,10 @@
     "sounds": [
       "victorgponce_com_autismon:press_bg1"
     ]
+  },
+  "main_menu": {
+    "sounds": [
+      "victorgponce_com_autismon:main_menu"
+    ]
   }
 }

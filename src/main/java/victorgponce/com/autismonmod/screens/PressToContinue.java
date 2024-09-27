@@ -49,7 +49,7 @@ public class PressToContinue extends Screen {
     private SoundEvent press;
     private double musicCategory = 0.0;
     private double masterCategory = 0.0;
-    private static boolean first = false;
+    private static boolean first = true;
 
     public PressToContinue() {
         super(Text.of("Press to Continue"));
@@ -76,14 +76,14 @@ public class PressToContinue extends Screen {
         int width = client.getWindow().getScaledWidth();
         int height = client.getWindow().getScaledHeight();
 
-        if (!first) {
+        if (first) {
             // Guardar configuración del sonido en variables (float)
             musicCategory = MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC);
             masterCategory = MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MASTER);
             LOGGER_CLIENT.info("Configuración de Musica: " + musicCategory);
             LOGGER_CLIENT.info("Configuración Master: " + masterCategory);
             LOGGER_CLIENT.info("Seteando boolean first a true...");
-            first = true;
+            first = false;
 
             // Setear nuevas configuraciones temporales para evitar musica que no queremos
             LOGGER_CLIENT.info("Seteando Opción 'Musica' al 0% (Inicio Screen)");
@@ -166,10 +166,8 @@ public class PressToContinue extends Screen {
         MinecraftClient.getInstance().options.getSoundVolumeOption(SoundCategory.MUSIC).setValue(masterCategory);
 
         MinecraftClient.getInstance().getSoundManager().stopAll();
-        // LoadingScreen loadingScreen = new LoadingScreen();
-        // MinecraftClient.getInstance().setScreen(loadingScreen);
-
-
+        CustomMainMenu customMainMenu = new CustomMainMenu();
+        MinecraftClient.getInstance().setScreen(customMainMenu);
 
         return true;
     }

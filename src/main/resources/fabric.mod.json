@@ -3,14 +3,16 @@
   "id": "autismon-mod",
   "version": "${version}",
   "name": "AUTISMON-MOD",
-  "description": "",
-  "authors": [],
+  "description": "A custom made mod for AUTISMON, it change client things such as Screens an texts",
+  "authors": ["Ponchisao326"],
   "contact": {
-    "repo": "https://github.com/ponchisao326/AUTISMON-MOD"
+    "homepage": "https://victorgponce.com",
+    "sources": "https://github.com/ponchisao326/AUTISMON-MOD/",
+    "releases": "https://github.com/ponchisao326/AUTISMON-MOD/releases"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/victorgponce_com_autismon/textures/gui/icons/icon_16x16.png",
-  "environment": "*",
+  "icon": "assets/autismon/icon.png",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "victorgponce.com.autismonmod.client.AUTISMON_MODClient"
@@ -26,6 +28,19 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/6NRTaCaEJU",
+        "modmenu.website": "https://victorgponce.com",
+        "modmenu.github_releases": "https://github.com/ponchisao326/AUTISMON-MOD/releases",
+        "modmenu.modrinth": "https://modrinth.com/user/PonchisaoHosting"
+      },
+      "description": "A custom made mod for AUTISMON, it change client things such as Screens an texts.",
+      "icon": "assets/autismon/icon.png",
+      "update_checker": false
+    }
   }
 }
 
