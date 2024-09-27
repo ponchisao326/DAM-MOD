@@ -21,10 +21,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import victorgponce.com.autismonmod.loading.SoundLoader;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 
 import java.util.Optional;
 
