@@ -36,7 +36,7 @@ public class CustomMainMenu extends Screen {
     private TextWidget pingTextWidget;
 
 
-    private static final String SERVER_ADDRESS = "node-marb.ponchisaohosting.xyz:25565";
+    private static final String SERVER_ADDRESS = "node-marb.ponchisaohosting.xyz:25566";
     private static final String NODE = "node-marb.ponchisaohosting.xyz";
     private static final int PORT = 25565;
     private static final String CONNECT_BUTTON_TEXT = "AUTISMON";

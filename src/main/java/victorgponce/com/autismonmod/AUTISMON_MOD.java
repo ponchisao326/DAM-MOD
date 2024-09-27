@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.Icons;
 import net.minecraft.resource.InputSupplier;
 import net.minecraft.resource.Resource;
@@ -14,6 +15,8 @@ import net.minecraft.resource.ResourcePack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -59,6 +62,12 @@ public class AUTISMON_MOD implements ModInitializer {
             player.sendMessage(prefix.copy()
                     .append(Text.literal("Si necesitas información y/o ayuda sobre el servidor usa ").formatted(Formatting.BLUE))
                     .append(Text.literal("/info").formatted(Formatting.GREEN)), false);
+
+            // Reproducir el sonido para todos los jugadores
+            for (ServerPlayerEntity otherPlayer : server.getPlayerManager().getPlayerList()) {
+                otherPlayer.playSound(SoundLoader.Erika, SoundCategory.MASTER, 20, 1.0f);
+            }
+
         });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> Info.registerCommands(dispatcher));

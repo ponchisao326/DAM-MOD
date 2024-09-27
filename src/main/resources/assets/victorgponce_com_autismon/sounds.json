@@ -8,5 +8,10 @@
     "sounds": [
       "victorgponce_com_autismon:main_menu"
     ]
+  },
+  "erika": {
+    "sounds": [
+      "victorgponce_com_autismon:erika"
+    ]
   }
 }

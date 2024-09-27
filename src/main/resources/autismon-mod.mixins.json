@@ -9,7 +9,8 @@
     "SplashOverlayInvoker"
   ],
   "client": [
-    "TitleScreen"
+    "GameMenuMixin",
+    "GameMenuScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
