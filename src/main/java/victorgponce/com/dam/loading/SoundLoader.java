@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.loading;
+package victorgponce.com.dam.loading;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.screens;
+package victorgponce.com.dam.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.terraformersmc.modmenu.gui.widget.ModMenuButtonWidget;
@@ -19,13 +19,13 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import victorgponce.com.autismonmod.loading.SoundLoader;
+import victorgponce.com.dam.loading.SoundLoader;
 import java.io.IOException;
 import java.net.Socket;
 
 import java.util.Optional;
 
-import static victorgponce.com.autismonmod.client.AUTISMON_MODClient.LOGGER_CLIENT;
+import static victorgponce.com.dam.client.DAM_MODClient.LOGGER_CLIENT;
 
 
 public class CustomMainMenu extends Screen {
@@ -43,7 +43,7 @@ public class CustomMainMenu extends Screen {
     private static final Text MENU = Text.literal("Menu by PonchisaoHosting");
     private static final Identifier menuTitleId = new Identifier("victorgponce_com_autismon:title_screen/autismon.png");
     private Screen parent;
-    private final Identifier[] backgroundTextures = new Identifier[91];
+    private final Identifier[] backgroundTextures = new Identifier[200];
 
     private int currentFrame = 0;
     private long lastFrameTime = 0;
@@ -54,7 +54,7 @@ public class CustomMainMenu extends Screen {
     private double musicCategory = 0.0;
     private double masterCategory = 0.0;
     private String STATUS = "El servidor se encuentra OFFLINE";
-    private static final long PING_CHECK_INTERVAL_MS = 5000; // Intervalo de 5 segundos
+    private static final long PING_CHECK_INTERVAL_MS = 4000; // Intervalo de 5 segundos
     private long lastPingCheckTime = 0; // Momento del último chequeo
     private Thread pingThread; // Hilo para la verificación del servidor
     private boolean stopPingThread = false; // Variable para detener el hilo cuando sea necesario

@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.mixin;
+package victorgponce.com.dam.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.GameMenuScreen;
@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import victorgponce.com.autismonmod.screens.CustomMainMenu;
+import victorgponce.com.dam.screens.CustomMainMenu;
 
 
-import static victorgponce.com.autismonmod.client.AUTISMON_MODClient.LOGGER_CLIENT;
+import static victorgponce.com.dam.client.DAM_MODClient.LOGGER_CLIENT;
 
 @Mixin(GameMenuScreen.class)
 public class GameMenuMixin {

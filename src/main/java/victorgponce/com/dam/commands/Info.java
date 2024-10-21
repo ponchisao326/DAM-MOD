@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.commands;
+package victorgponce.com.dam.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.CommandManager;

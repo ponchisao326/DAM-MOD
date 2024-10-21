@@ -3,7 +3,7 @@
   "id": "autismon-mod",
   "version": "${version}",
   "name": "AUTISMON-MOD",
-  "description": "A custom made mod for AUTISMON, it change client things such as Screens an texts",
+  "description": "A custom made mod for the DAM Class, it change client things such as Screens an texts",
   "authors": ["Ponchisao326"],
   "contact": {
     "homepage": "https://victorgponce.com",
@@ -15,10 +15,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "victorgponce.com.autismonmod.client.AUTISMON_MODClient"
+      "victorgponce.com.dam.client.DAM_MODClient"
     ],
     "main": [
-      "victorgponce.com.autismonmod.AUTISMON_MOD"
+      "victorgponce.com.dam.DAM_MOD"
     ]
   },
   "mixins": [
@@ -37,7 +37,7 @@
         "modmenu.github_releases": "https://github.com/ponchisao326/AUTISMON-MOD/releases",
         "modmenu.modrinth": "https://modrinth.com/user/PonchisaoHosting"
       },
-      "description": "A custom made mod for AUTISMON, it change client things such as Screens an texts.",
+      "description": "A custom made mod for the DAM Class, it change client things such as Screens an texts.",
       "icon": "assets/autismon/icon.png",
       "update_checker": false
     }

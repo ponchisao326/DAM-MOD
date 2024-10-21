@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.mixin;
+package victorgponce.com.dam.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import victorgponce.com.autismonmod.client.AUTISMON_MODClient;
+import victorgponce.com.dam.client.DAM_MODClient;
 
 import java.util.Optional;
 
@@ -86,7 +86,7 @@ public class mojangLoadingOverlay {
 
         } else {
             // La textura no se pudo cargar, imprimir un mensaje de error
-            AUTISMON_MODClient.LOGGER_CLIENT.error("Error: No se pudo cargar la textura de fondo.");
+            DAM_MODClient.LOGGER_CLIENT.error("Error: No se pudo cargar la textura de fondo.");
         }
 
         // Cancelar la renderización original de la pantalla de carga

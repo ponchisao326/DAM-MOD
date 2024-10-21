@@ -1,6 +1,5 @@
-package victorgponce.com.autismonmod.screens;
+package victorgponce.com.dam.screens;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.GameOptions;

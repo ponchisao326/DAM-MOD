@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.screens;
+package victorgponce.com.dam.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
@@ -11,13 +11,11 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.glfw.GLFW;
-import victorgponce.com.autismonmod.client.AUTISMON_MODClient;
-import victorgponce.com.autismonmod.loading.SoundLoader;
+import victorgponce.com.dam.loading.SoundLoader;
 
 import java.util.Optional;
 
-import static victorgponce.com.autismonmod.client.AUTISMON_MODClient.LOGGER_CLIENT;
+import static victorgponce.com.dam.client.DAM_MODClient.LOGGER_CLIENT;
 
 public class PressToContinue extends Screen {
 
@@ -137,7 +135,7 @@ public class PressToContinue extends Screen {
             }
             // Renderizar texto en la parte superior de la pantalla
             String username = client.getSession().getUsername();
-            Text text = Text.of("¡Bienvenido " + username +  " a AUTISMON!");
+            Text text = Text.of("¡Bienvenido " + username +  " a DAM!");
             int textWidth = textRenderer.getWidth(text);
             int textX = (width - textWidth) / 2;
             int textY = 10; // adjust this value to change the vertical position

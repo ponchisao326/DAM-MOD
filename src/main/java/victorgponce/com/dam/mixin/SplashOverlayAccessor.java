@@ -1,4 +1,4 @@
-package victorgponce.com.autismonmod.mixin;
+package victorgponce.com.dam.mixin;
 
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.resource.ResourceReload;
