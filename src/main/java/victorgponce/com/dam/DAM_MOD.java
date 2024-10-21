@@ -43,7 +43,7 @@ public class DAM_MOD implements ModInitializer {
             // Obtener la lista de jugadores desde el PlayerManager
             List<ServerPlayerEntity> players = playerManager.getPlayerList();
 
-            // Crear el prefijo [AUTISMON MOD] con colores personalizados
+            // Crear el prefijo [DAM MOD] con colores personalizados
             Text prefix = Text.literal("[").formatted(Formatting.GRAY)
                     .append(Text.literal("DAM MOD").formatted(Formatting.RED, Formatting.BOLD))
                     .append(Text.literal("] ").formatted(Formatting.GRAY))
@@ -52,7 +52,7 @@ public class DAM_MOD implements ModInitializer {
             // Mensaje de bienvenida con el prefijo
             player.sendMessage(prefix.copy()
                     .append(Text.literal("¡Bienvenido a ").formatted(Formatting.GOLD))
-                    .append(Text.literal("AUTISMON!").formatted(Formatting.AQUA)), false);
+                    .append(Text.literal("REVOLUT SERVER!").formatted(Formatting.AQUA)), false);
 
             // Mensaje de información con el prefijo
             player.sendMessage(prefix.copy()

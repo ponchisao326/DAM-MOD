@@ -10,6 +10,7 @@ public class Info {
 
     public static void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("info")
+                .requires(source -> true) // Permitir que todos puedan usar el comando
                 .executes(context -> {
                     sendInfoMessage(context.getSource());
                     return 1;
@@ -19,36 +20,20 @@ public class Info {
     // Método para enviar el mensaje informativo
     private static void sendInfoMessage(ServerCommandSource source) {
 
-        // Crear el prefijo [AUTISMON MOD] con colores personalizados
+        // Crear el prefijo [DAM MOD] con colores personalizados
         Text prefix = Text.literal("[").formatted(Formatting.GRAY)
-                .append(Text.literal("AUTISMON MOD").formatted(Formatting.RED, Formatting.BOLD))
+                .append(Text.literal("DAM MOD").formatted(Formatting.RED, Formatting.BOLD))
                 .append(Text.literal("] ").formatted(Formatting.GRAY))
                 .append(Text.literal("» ").formatted(Formatting.AQUA));
 
-        // Enviar el mensaje con el prefijo y el contenido
+        // Mensaje adicional: información sobre el creador y enlaces
         source.sendMessage(prefix.copy()
-                .append(Text.literal("Para empezar tu aventura necesitas un Pokemon. Pulsa la letra ").formatted(Formatting.YELLOW))
-                .append(Text.literal("M").formatted(Formatting.GREEN, Formatting.BOLD))
-                .append(Text.literal(" para seleccionar tu inicial. Si usas la rueda en la parte izquierda verás más opciones de iniciales. ")));
-
-        source.sendMessage(prefix.copy()
-                .append(Text.literal("Para sacar tu Pokemon elegido o combatir contra otro Pokemon, deberás usar la ").formatted(Formatting.YELLOW))
-                .append(Text.literal("R").formatted(Formatting.GREEN, Formatting.BOLD))
-                .append(Text.literal(", tecla que está siendo usada por otro mod. Tendrás que buscar en los controles el mod que la esté utilizando y desvincularla.")));
+                .append(Text.literal("Mod creado por Victor Gomez (PonchisaoHosting). ").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD))
+                .append(Text.literal("Visita mi web: ").formatted(Formatting.LIGHT_PURPLE))
+                .append(Text.literal("https://victorgponce.com").formatted(Formatting.BLUE, Formatting.UNDERLINE)));
 
         source.sendMessage(prefix.copy()
-                .append(Text.literal("Una vez tengas esto, usa otra vez la ").formatted(Formatting.YELLOW))
-                .append(Text.literal("M").formatted(Formatting.GREEN, Formatting.BOLD))
-                .append(Text.literal(" para ver tu/tus Pokemon, y te saldrá toda la información de tu Pokemon, como habilidades, movimientos y estadísticas.")));
-
-        source.sendMessage(prefix.copy()
-                .append(Text.literal("Una vez llegues aquí, todo depende de ti. Si necesitas más ayuda, usa una Pokepedia (combina un libro con un Apricorn).").formatted(Formatting.YELLOW)));
-
-        // Mensaje adicional: "Mod creado por Ponchisao326"
-        source.sendMessage(prefix.copy()
-                .append(Text.literal("Mod creado por Ponchisao326").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD)));
-
-
+                .append(Text.literal("Puedes encontrar el código fuente en GitHub: ").formatted(Formatting.LIGHT_PURPLE))
+                .append(Text.literal("https://github.com/ponchisao326/DAM-MOD").formatted(Formatting.BLUE, Formatting.UNDERLINE)));
     }
-
 }
