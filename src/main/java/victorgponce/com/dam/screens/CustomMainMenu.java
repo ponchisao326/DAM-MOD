@@ -43,6 +43,7 @@ public class CustomMainMenu extends Screen {
     private static final Text MENU = Text.literal("Menu by PonchisaoHosting");
     private static final Identifier menuTitleId = new Identifier("victorgponce_com_autismon:title_screen/autismon.png");
     private final Identifier[] backgroundTextures = new Identifier[932];
+    private final Identifier backgroundStatic = new Identifier("victorgponce_com_autismon:title_screen/static.png");
 
     private Screen parent;
     private int currentFrame = 0;
@@ -66,12 +67,12 @@ public class CustomMainMenu extends Screen {
         startPingThread();
 
         // Inicialización de texturas de fondo
-        for (int i = 0; i < backgroundTextures.length; i++) {
-            backgroundTextures[i] = new Identifier("victorgponce_com_autismon:title_screen/" + (i + 1) + ".png");
-        }
+        // sfor (int i = 0; i < backgroundTextures.length; i++) {
+        // s    backgroundTextures[i] = new Identifier("victorgponce_com_autismon:title_screen/" + (i + 1) + ".png");
+        // s}
 
         // Lanzar los demás hilos
-        startTextureLoadingThread();
+        // startTextureLoadingThread();
         startTitleLoadingThread();
         startMusicThread();
     }
@@ -233,11 +234,13 @@ public class CustomMainMenu extends Screen {
             lastFrameTime = currentTime;
         }
 
-        Identifier backgroundTextureId = backgroundTextures[currentFrame];
-        RenderSystem.setShaderTexture(0, backgroundTextureId);
-        drawContext.drawTexture(backgroundTextureId, 0, 0, 0.0F, 0.0F, this.width, this.height, this.width, this.height);
-        pingTextWidget.setMessage(Text.of(STATUS));
-        super.render(drawContext, mouseX, mouseY, delta);
+        Identifier backgroundStaticBg = backgroundStatic;
+        RenderSystem.setShaderTexture(0, backgroundStaticBg);
+        drawContext.drawTexture(backgroundStaticBg, 0, 0, 0.0F, 0.0F, this.width, this.height, this.width, this.height);
+
+        // Identifier backgroundTextureId = backgroundTextures[currentFrame];
+        // RenderSystem.setShaderTexture(0, backgroundTextureId);
+        // drawContext.drawTexture(backgroundTextureId, 0, 0, 0.0F, 0.0F, this.width, this.height, this.width, this.height);
 
         // Actualizar el mensaje de estado
         pingTextWidget.setMessage(Text.of(STATUS));
@@ -254,5 +257,6 @@ public class CustomMainMenu extends Screen {
             int titleY = topMargin + (this.height / 2);
             drawContext.drawTexture(menuTitleId, titleX, titleY, 0, 0, titleWidth, titleHeight, titleWidth, titleHeight);
         }
+        super.render(drawContext, mouseX, mouseY, delta);
     }
 }
